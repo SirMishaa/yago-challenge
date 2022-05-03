@@ -44,6 +44,9 @@
             "Composer\\Config::disableProcessTimeout",
             "./vendor/bin/phpstan analyse --memory-limit=3G"
         ],
+        "pest": [
+            "./vendor/bin/pest"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
