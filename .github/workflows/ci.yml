@@ -5,7 +5,7 @@ on:
 
 jobs:
 
-  phpstan:
+  laravel:
     runs-on: ubuntu-latest
     container:
       image: kirschbaumdevelopment/laravel-test-runner:8.1
@@ -26,21 +26,19 @@ jobs:
         with:
           fetch-depth: 1
 
-    - name: Install composer dependencies
-      run: |
-        composer install --no-scripts --no-interaction
+      - name: Install composer dependencies
+        run: |
+          composer install --no-scripts --no-interaction
 
-    - name: Set up application
-      run: |
-        cp .env.example .env
-        php artisan key:generate
+      - name: Set up application
+        run: |
+          cp .env.example .env
+          php artisan key:generate
 
-    - name: Execute phpstan (Static code analysis)
-      run: |
-        composer run phpstan
+      - name: Execute phpstan (Static code analysis)
+        run: |
+          composer run phpstan
 
-    - name: Execute pest (unit tests)
-      run: |
-        composer run pest
-
-
+      - name: Execute pest (unit tests)
+        run: |
+          composer run pest
