@@ -1,0 +1,46 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  phpstan:
+    runs-on: ubuntu-latest
+    container:
+      image: kirschbaumdevelopment/laravel-test-runner:8.1
+
+    services:
+      pgsql:
+        image: 'postgres:14'
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: yago-challenge_db
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+    - name: Install composer dependencies
+      run: |
+        composer install --no-scripts --no-interaction
+
+    - name: Set up application
+      run: |
+        cp .env.example .env
+        php artisan key:generate
+
+    - name: Execute phpstan (Static code analysis)
+      run: |
+        composer run phpstan
+
+    - name: Execute pest (unit tests)
+      run: |
+        composer run pest
+
+
