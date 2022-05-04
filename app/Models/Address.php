@@ -19,6 +19,9 @@ class Address extends Model
       'province',
     ];
 
+    /**
+     * @return BelongsTo<UserLead, Address>
+     */
     public function userLead(): BelongsTo
     {
         return $this->belongsTo(UserLead::class);

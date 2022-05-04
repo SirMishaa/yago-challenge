@@ -17,6 +17,9 @@ class UserLead extends Model
       'phone_number',
     ];
 
+    /**
+     * @return HasOne<Address>
+     */
     public function address(): HasOne
     {
         return $this->hasOne(Address::class);
