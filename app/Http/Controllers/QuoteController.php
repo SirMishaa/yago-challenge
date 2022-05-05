@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Dto\ProfessionalLiability\GetQuoteRequestDTO;
 use App\Enum\ProfessionalLiability\CoverageCeilingFormulaEnumeration;
 use App\Http\Requests\GetQuoteRequest;
+use App\Models\Quote;
 use App\Services\ProfessionalLiabilityService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -13,9 +14,6 @@ class QuoteController extends Controller {
 
     public function handleForm(GetQuoteRequest $request, ProfessionalLiabilityService $professionalLiabilityService): RedirectResponse
     {
-
-        ray($request->getNaceBelCode());
-
         $quoteRequest = new GetQuoteRequestDTO([
             'annualRevenue' => (int) $request->get('companyAnnualIncome'),
             'enterpriseNumber' => $request->get('companyNumber'),
@@ -27,14 +25,43 @@ class QuoteController extends Controller {
         ]);
 
         $responseData = $professionalLiabilityService->getQuote($quoteRequest);
-        ray($responseData);
+        if (!$responseData["success"]) {
+            throw new \Error('Something went wrong');
+        }
 
-        return redirect()->route('quote.form')->with('Hello');
+        $quote = new Quote();
+
+        $quote->user_lead_id = 1;
+        $quote->available = $responseData['data']['available'];
+        $quote->coverage_ceiling = $responseData['data']['coverageCeiling'];
+        $quote->deductible = $responseData['data']['deductible'];
+        $quote->quote_id = $responseData['data']['quoteId'];
+        $quote->after_delivery = $responseData['data']['grossPremiums']['afterDelivery'];
+        $quote->after_liability = $responseData['data']['grossPremiums']['publicLiability'];
+        $quote->professional_indemnity = $responseData['data']['grossPremiums']['professionalIndemnity'];
+        $quote->entrusted_objects = $responseData['data']['grossPremiums']['entrustedObjects'];
+        $quote->legal_expenses = $responseData['data']['grossPremiums']['legalExpenses'];
+
+        ray($quote);
+        $quote->save();
+
+        return redirect()->route('quote.summary', ['id' => $quote->id]);
     }
 
     public function renderForm(): View
     {
         return view('forms.rc-pro.rcpro-form');
+    }
+
+    public function renderQuote(int $id)
+    {
+        $quote = Quote::whereId($id)->first();
+
+        if (is_null($quote)) {
+            return redirect()->route('quote.form');
+        }
+
+        return view('forms.rc-pro.rcpro-quote', ['quote' => $quote]);
     }
 }
 

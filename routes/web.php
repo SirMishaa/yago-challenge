@@ -20,3 +20,4 @@ Route::get('/', function () {
 
 Route::get('/rc-pro/quote', [QuoteController::class, 'renderForm'])->name('quote.form');
 Route::post('/rc-pro/quote', [QuoteController::class, 'handleForm']);
+Route::get('/rc-pro/quote/{id}', [QuoteController::class, 'renderQuote'])->name('quote.summary');
