@@ -1,5 +1,5 @@
 {{-- Personnal information related stuff here --}}
-<section class="md:grid md:grid-cols-3 md:gap-6 py-4">
+<section class="md:grid md:grid-cols-3 md:gap-6 py-4 border-transparent">
     <div class="md:col-span-1">
         <h3 class="text-lg font-medium leading-6 text-gray-900">Information personnelle</h3>
         <p class="mt-1 text-sm text-gray-500">Veillez à utiliser une adresse mail valide et à vérifier vos informations.</p>
@@ -10,13 +10,16 @@
                 <label for="firstName" class="block text-sm font-medium text-gray-700">Prénom</label>
                 <input placeholder="John" type="text" name="firstName" id="firstName" autocomplete="firstName" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 @error('firstName')
-                    <small class="text-sm text-red-500">{{ $message }}</small>
+                    <small class="text-xs text-red-500">{{ $message }}</small>
                 @enderror
             </div>
 
             <div class="col-span-6 sm:col-span-2">
                 <label for="lastName" class="block text-sm font-medium text-gray-700">Nom de famille</label>
                 <input placeholder="Doe" type="text" name="lastName" id="lastName" autocomplete="lastName" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                @error('lastName')
+                    <small class="text-xs text-red-500">{{ $message }}</small>
+                @enderror
             </div>
 
             <div class="col-span-6 sm:col-span-2">
@@ -30,6 +33,10 @@
                     <input placeholder="+32049000000" type="text" name="phoneNumber" id="phoneNumber" autocomplete="phoneNumber" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 pl-10 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
                 <small class="text-gray-400">Format +32(0)</small>
+                @error('phoneNumber')
+                    <br>
+                    <small class="text-xs text-red-500">{{ $message }}</small>
+                @enderror
             </div>
 
             <div class="col-span-6 sm:col-span-3">
@@ -43,6 +50,9 @@
                     </div>
                     <input type="email" name="email" id="email" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md" placeholder="johndoe@exemple.be">
                 </div>
+                @error('email')
+                    <small class="text-xs text-red-500">{{ $message }}</small>
+                @enderror
             </div>
         </div>
     </div>

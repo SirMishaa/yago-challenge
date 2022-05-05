@@ -9,6 +9,9 @@
             <div class="col-span-6 sm:col-span-3">
                 <label for="companyName" class="block text-sm font-medium text-gray-700">Nom légal de l'entreprise</label>
                 <input type="text" name="companyName" id="companyName" autocomplete="companyName" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                @error('companyName')
+                    <small class="text-xs text-red-500">{{ $message }}</small>
+                @enderror
             </div>
 
             <div class="col-span-6 sm:col-span-3">
@@ -22,6 +25,10 @@
                     </div>
                 </div>
                 <small class="text-gray-400">10 caractères. Les tirets sont facultatifs</small>
+                @error('companyNumber')
+                    <br>
+                    <small class="text-xs text-red-500">{{ $message }}</small>
+                @enderror
             </div>
 
             <div class="col-span-6 sm:col-span-2">
@@ -35,6 +42,9 @@
                     </div>
                     <input min="0" type="number" name="companyAnnualIncome" id="companyAnnualIncome" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pr-10 sm:text-sm border-gray-300 rounded-md" placeholder="80000">
                 </div>
+                @error('companyAnnualIncome')
+                    <small class="text-xs text-red-500">{{ $message }}</small>
+                @enderror
             </div>
 
             <div class="col-span-6 sm:col-span-2">
@@ -43,6 +53,9 @@
                     <option>Société (personne morale)</option>
                     <option>Entreprise individuelle (personne physique)</option>
                 </select>
+                @error('companyType')
+                    <small class="text-xs text-red-500">{{ $message }}</small>
+                @enderror
             </div>
 
             <div class="col-span-6 sm:col-span-2">
@@ -52,6 +65,9 @@
                         <option value="{{ $value }}">{{ $label }}</option>
                     @endforeach
                 </select>
+                @error('companyActivityKind')
+                    <small class="text-xs text-red-500">{{ $message }}</small>
+                @enderror
             </div>
 
             <div class="col-span-6 sm:col-span-6 mt-4">
@@ -72,6 +88,10 @@
                         NACE-BEL de niveau 5
                     </a>
                 </small>
+                @error('companyNaceBelCode')
+                    <br>
+                    <small class="text-xs text-red-500">{{ $message }}</small>
+                @enderror
             </div>
         </div>
     </div>
