@@ -20,8 +20,8 @@ class GetQuoteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'firstName' => 'required|min:1|max:50',
-            'lastName' => 'required|min:1|max:50',
+            'firstName' => 'required|min:2|max:50',
+            'lastName' => 'required|min:2|max:50',
             'phoneNumber' => 'required',
             'email' => 'required|email:rfc',
             'companyName' => 'required|min:3|max:255',
@@ -34,5 +34,11 @@ class GetQuoteRequest extends FormRequest
             'assuranceCeilingCoverage' => 'required',
             'assuranceLegalExpense' => 'required'
         ];
+    }
+
+    public function getNaceBelCode(): array
+    {
+        $trimStr = str_replace(' ', '', $this->get('companyNaceBelCode'));
+        return explode(",", $trimStr);
     }
 }
