@@ -53,7 +53,7 @@ class QuoteController extends Controller {
         return view('forms.rc-pro.rcpro-form');
     }
 
-    public function renderQuote(int $id)
+    public function renderQuote(int $id): View | RedirectResponse
     {
         $quote = Quote::whereId($id)->first();
 

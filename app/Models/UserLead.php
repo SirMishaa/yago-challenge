@@ -26,6 +26,9 @@ class UserLead extends Model
         return $this->hasOne(Address::class);
     }
 
+    /**
+     * @return HasMany<Quote>
+     */
     public function quotes(): HasMany
     {
         return $this->hasMany(Quote::class);

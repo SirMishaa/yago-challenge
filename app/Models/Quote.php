@@ -28,6 +28,10 @@ class Quote extends Model
         'legal_expenses',
     ];
 
+
+    /**
+     * @return BelongsTo<UserLead, Quote>
+     */
     public function userLead(): BelongsTo
     {
         return $this->belongsTo(UserLead::class);
