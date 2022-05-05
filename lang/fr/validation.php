@@ -134,6 +134,11 @@ return [
         ],
     ],
     'attributes' => [
-        'firstName' => 'prénom'
+        'firstName' => 'prénom',
+        'lastName' => 'nom de famille',
+        'phoneNumber' => 'numéro de téléphone',
+        'companyName' => 'nom de l\'entreprise',
+        'companyNumber' => 'numéro d\'identification d\'entreprise',
+        'companyNaceBelCode' => 'code NACE-BE'
     ]
 ];
