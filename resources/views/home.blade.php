@@ -5,7 +5,8 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
         @include('partials.nav-breadcrumbs')
         <h1 class="text-2xl mt-12">Responsabilité civile professionnelle</h1>
-        <form method="POST" class="bg-white shadow-lg rounded-lg w-full mt-6 px-4 py-5 divide-y-[1px]">
+        <form action="/rc-pro/quote" method="POST" class="bg-white shadow-lg rounded-lg w-full mt-6 px-4 py-5 divide-y-[1px]">
+            @csrf
             {{-- Personnal information related stuff here --}}
             @include('forms.rc-pro.parts.personal-section')
 
