@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\QuoteController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'handle']);
+Route::get('/', function () {
+   return redirect()->route('quote.form');
+});
 
+Route::get('/rc-pro/quote', [QuoteController::class, 'renderForm'])->name('quote.form');
 Route::post('/rc-pro/quote', [QuoteController::class, 'handleForm']);

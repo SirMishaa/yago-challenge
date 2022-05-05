@@ -48,10 +48,9 @@
             <div class="col-span-6 sm:col-span-2">
                 <label for="companyActivityKind" class="block text-sm font-medium text-gray-700">Secteur d'activité</label>
                 <select id="companyActivityKind" name="companyActivityKind" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                    <option>Médical</option>
-                    <option>Financier</option>
-                    <option>Numérique</option>
-                    <option>Personnalisé</option>
+                    @foreach(\App\Enum\ProfessionalLiability\CompanyActivityKind::options() as $value => $label)
+                        <option value="{{ $value }}">{{ $label }}</option>
+                    @endforeach
                 </select>
             </div>
 

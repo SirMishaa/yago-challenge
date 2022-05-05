@@ -9,6 +9,9 @@
             <div class="col-span-6 sm:col-span-2">
                 <label for="firstName" class="block text-sm font-medium text-gray-700">Prénom</label>
                 <input placeholder="John" type="text" name="firstName" id="firstName" autocomplete="firstName" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                @error('firstName')
+                    <small class="text-sm text-red-500">{{ $message }}</small>
+                @enderror
             </div>
 
             <div class="col-span-6 sm:col-span-2">
