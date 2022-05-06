@@ -36,7 +36,7 @@ The recommended way to set up the project is to use [Docker](https://www.docker.
 git clone https://github.com/SirMishaa/yago-challenge
 ```
 
-- Now copy `.env.example` to `.env` and fill it with the correct values.
+- Now copy `.env.example` to `.env` and fill it with the correct values. (Dont forget to fill `PROFESSIONAL_LIABILITY_PROVIDER_URL` and `PROFESSIONAL_LIABILITY_PROVIDER_APIKEY`)
 ````
 cd yago-challenge/
 cp .env.example .env
