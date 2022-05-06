@@ -2,6 +2,7 @@
 
 
 ## Yago Challenge
+![Ci Workflow](https://github.com/SirMishaa/yago-challenge/actions/workflows/ci.yml/badge.svg)
 
 This repository contains the code for the Yago challenge. It is realized with the [Laravel](https://laravel.com) framework under [PHP 8.1](https://www.php.net/releases/8.1/en.php) programming language.
 
@@ -85,6 +86,42 @@ sl yarn install
 sl yarn run production
 # Here, you can also use sl yarn run dev if you're on a development environment.
 ```
+
+# Available scripts
+Here is the list of scripts you can use :
+- `sl composer pest` : Run unit tests
+- `sl composer phpstan` : Run the static code analysis tool
+- `sl composer ide-helper` : Generate IDE helper files using [Laravel IDE helper package](https://github.com/barryvdh/laravel-ide-helper)
+- `sl yarn run production` : Build the assets
+- `sl yarn run dev` : Build the assets in development mode (with reloading)
+
+To interact with the Laravel application and perform actions such as clearing the cache, launching migrations, that kind of thing, you have to use [Laravel artisan](https://laravel.com/docs/9.x/artisan).
+
+Artisan is the command line interface included with Laravel. Artisan exists at the root of your application as the artisan script and provides a number of helpful commands that can assist you while you build your application. To view a list of all available Artisan commands, you may use the list command:
+```
+sl artisan list
+```
+You can also use this site which is very convenient to search for an order and to see the available parameters : https://artisan.page/
+# Architecture
+In this section, I will explain the architecture of the application as well as the different folders and their uses. Know that it is very close to a classic Laravel architecture.
+
+- ``.github``: Github actions workflow and Github related stuff.
+- ``app``: Main folder of the application.
+- ``bootstrap``: Contains bootstrap files (main entry file).
+- ``config``: Related configuration files for every aspect of the app.
+- ``database``: Database, migrations, factories & seeders files.
+- ``lang``: Contains all the translations files.
+- ``public``: Contains all the static files (like favicon, robots.txt, etc).
+- ``resources``: Contains all the assets and views.
+- ``storage``: Contains storage like upload files, logs, cache, etc.
+- ``tests``: Contains unit tests files.
+
+The Http part of the application is in the folder ``app/Http``. You can find middleware, requests and controllers in this folder.
+
+The model part of the application is in the folder ``app/Models``. You can find all the models in this folder.
+
+The definition of models (like properties, relationships, etc) is in the database part of the application, on the folder ``database/migrations``. 
+
 
 ## License
 This repository is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
