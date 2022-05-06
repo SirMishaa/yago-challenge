@@ -111,16 +111,36 @@ In this section, I will explain the architecture of the application as well as t
 - ``config``: Related configuration files for every aspect of the app.
 - ``database``: Database, migrations, factories & seeders files.
 - ``lang``: Contains all the translations files.
+- ``node_modules``: Contains all the node.js dependencies.
 - ``public``: Contains all the static files (like favicon, robots.txt, etc).
 - ``resources``: Contains all the assets and views.
+- ``routes``: Contains all the routes of the application.
 - ``storage``: Contains storage like upload files, logs, cache, etc.
 - ``tests``: Contains unit tests files.
+- ``vendor``: Contains all the composer (php) dependencies.
 
 The Http part of the application is in the folder ``app/Http``. You can find middleware, requests and controllers in this folder.
 
 The model part of the application is in the folder ``app/Models``. You can find all the models in this folder.
 
 The definition of models (like properties, relationships, etc) is in the database part of the application, on the folder ``database/migrations``. 
+
+# About the challenge
+For my part, I chose to make a rather simple monolithic architecture, but I cut out the quote retrieval in a dedicated service.
+
+It all starts with the HTML form in `views/forms/rc-pro/rcpro-form.blade.php` [(here in Github)](https://github.com/SirMishaa/yago-challenge/blob/main/resources/views/forms/rc-pro/rcpro-form.blade.php), this file will include several subparts of the form in order to properly organize the views. 
+
+When you submit the form, it will call the `QuoteController` but first it will pass the validation rules defined in the `GetQuoteRequest` class. (`app/Http/Requests/GetQuoteRequest.php`) [(here in Github)](https://github.com/SirMishaa/yago-challenge/blob/main/app/Http/Requests/GetQuoteRequest.php). If the validation fails, Laravel will set the errors in the session and redirect you back to the form and it will show the errors.
+
+If it succeeds, the controller will build a new `GetQuoteRequestDTO` object [(here in Github)](https://github.com/SirMishaa/yago-challenge/blob/main/app/Dto/ProfessionalLiability/GetQuoteRequestDTO.php) with the data from the form. Then, it will call the `QuoteService` to get the quote and persist it in the database.
+
+Small subtlety, the options that we can see in the HTML part of the form are automatically generated according to several enumerations. (See `app/Enum/ProfessionalLiability/`). I chose to use enumerations in order to be as generic as possible and to use almost the same code for other kinds of professions.
+
+The ProfessionalLiabilityService, which is responsible for getting a quote will get its configuration from a configuration file.
+
+
+
+
 
 
 ## License

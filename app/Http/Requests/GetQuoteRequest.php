@@ -29,7 +29,6 @@ class GetQuoteRequest extends FormRequest
             'companyAnnualIncome' => 'numeric',
             'companyType' => 'required',
             'companyActivityKind' => 'required',
-            // Todo : improve validation
             'companyNaceBelCode' => 'required',
             'assuranceCeilingCoverage' => 'required',
             'assuranceLegalExpense' => 'required'
