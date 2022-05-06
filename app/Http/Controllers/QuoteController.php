@@ -7,6 +7,7 @@ use App\Enum\ProfessionalLiability\CoverageCeilingFormulaEnumeration;
 use App\Http\Requests\GetQuoteRequest;
 use App\Models\Quote;
 use App\Services\ProfessionalLiabilityService;
+use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -24,10 +25,15 @@ class QuoteController extends Controller {
             'coverageCeilingFormula' => CoverageCeilingFormulaEnumeration::Large
         ]);
 
-        $responseData = $professionalLiabilityService->getQuote($quoteRequest);
-        if (!$responseData["success"]) {
-            throw new \Error('Something went wrong');
+        try {
+            $responseData = $professionalLiabilityService->getQuote($quoteRequest);
+        } catch (Exception $exception) {
+            ray('Redirecting to error page');
+            return redirect()
+                ->route('quote.form')
+                ->with(['providerError' => $exception->getMessage()]);
         }
+
 
         $quote = new Quote();
 

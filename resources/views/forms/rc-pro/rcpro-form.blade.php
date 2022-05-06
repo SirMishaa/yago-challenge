@@ -6,6 +6,12 @@
         @include('partials.nav-breadcrumbs')
         <h1 class="text-2xl mt-12">Responsabilité civile professionnelle</h1>
         <form action="{{ route('quote.form')  }}" method="POST" class="bg-white shadow-lg rounded-lg w-full mt-6 px-6 py-5 divide-y-[1px]">
+            @if(session('providerError'))
+                <div class="bg-red-400 rounded-lg my-2 py-4 text-center">
+                    <p class="text-white">{{ session('providerError') }}</p>
+                </div>
+            @endif
+
             @csrf
             {{-- Personnal information related stuff here --}}
             @include('forms.rc-pro.parts.personal-section')
