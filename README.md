@@ -76,7 +76,7 @@ sl artisan key:generate
 ```
 - Run the migrations & seeding using the following command:
 ```
-sl artisan artisan migrate:fresh --seed
+sl artisan migrate:fresh --seed
 # Or
 ./vendor/bin/sail artisan migrate:fresh --seed
 ```
